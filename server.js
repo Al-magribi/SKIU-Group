@@ -9,9 +9,9 @@ require("dotenv").config({
 
 dbConnection();
 
-// app.get("/", (req, res) => {
-//   res.send("Server is running");
-// });
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
 
 const PORT = 12121;
 
