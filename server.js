@@ -1,5 +1,5 @@
-const app = require("./app");
 const dbConnection = require("./config/dbConnection");
+const app = require("./app");
 
 // .env file Configuration
 const path = require("path");
