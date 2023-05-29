@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Home = require("../models/Home");
+const {
+  authenticateToken,
+  authorizeAdmin,
+} = require("../handler/auth&authorize");
 
 // CREATE WEB DATA => /api/web/create
 router.post("/create", async (req, res) => {
@@ -39,25 +43,27 @@ router.get("/detail/:id", async (req, res) => {
 
 // UPDATE WEB DATA => /api/web/update
 
-router.put("/update-web/:id", async (req, res) => {
-  try {
-    let data = await Home.findById(req.params.id);
+router.put(
+  "/update/:id",
+  authenticateToken,
+  authorizeAdmin,
+  async (req, res) => {
+    try {
+      let data = await Home.findById(req.params.id);
 
-    req.body.phone = req.body.phone.replace(/^0/, "62");
+      req.body.phone = req.body.phone.replace(/^0/, "62");
 
-    // Parse the string value of the slider field to an actual array of objects
-    req.body.slider = JSON.parse(req.body.slider);
+      data = await Home.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
 
-    unit = await Home.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-
-    res.status(201).json({ message: "Berhasil diperbarui", data });
-  } catch (error) {
-    res.status(404).json({ message: error });
+      res.status(201).json({ message: "Berhasil diperbarui" });
+    } catch (error) {
+      res.status(404).json({ message: error.message });
+    }
   }
-});
+);
 
 // router.put("/update-web/:id", async (req, res) => {
 //   try {

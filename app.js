@@ -2,6 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const path = require("path");
+// ROUTES
+const teamRoutes = require("./routes/teamRoutes");
+const inventoryRoutes = require("./routes/inventoryRoutes");
+const equipmentRoutes = require("./routes/equipRoutes");
+const projectRoutes = require("./routes/projectRoutes");
+const userRoutes = require("./routes/userRoutes");
+const reportRoutes = require("./routes/reportRoutes");
+const homeRoutes = require("./routes/homeRoutes");
+const stockroomRoutes = require("./routes/StockRoutes");
 
 const bodyParser = require("body-parser");
 const ErrMiddleware = require("./handler/ErrMiddleware");
@@ -29,22 +38,14 @@ app.use((req, res, next) => {
   next();
 });
 
-// ROUTES
-const teamRoutes = require("./routes/teamRoutes");
-const inventoryRoutes = require("./routes/inventoryRoutes");
-const equipmentRoutes = require("./routes/equipRoutes");
-const projectRoutes = require("./routes/projectRoutes");
-const userRoutes = require("./routes/userRoutes");
-const reportRoutes = require("./routes/reportRoutes");
-const homeRoutes = require("./routes/homeRoutes");
-
 app.use("/api/team", teamRoutes);
 app.use("/api/inventory", inventoryRoutes);
 app.use("/api/equip", equipmentRoutes);
 app.use("/api/project", projectRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/worker", reportRoutes);
-app.use("/api/public/web", homeRoutes);
+app.use("/api/gudang", stockroomRoutes);
+app.use("/api/admin/web", homeRoutes);
 
 if (process.env.NODE_ENV === "PRODUCTION") {
   app.use(express.static(path.join(__dirname, "./build")));

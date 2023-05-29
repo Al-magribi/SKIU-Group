@@ -58,3 +58,29 @@ exports.authorizeAdmin = async (req, res, next) => {
     return res.status(500).json({ message: "Server Error" });
   }
 };
+
+exports.authorizeAdminStock = async (req, res, next) => {
+  const username = req.user.username;
+
+  try {
+    // Find the user in the database by their username
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(401).json({ message: "User tidak ditemukan" });
+    }
+
+    // Check if the user has an "gudang" and "admin" role
+    if (user.role !== "gudang" && user.role !== "admin") {
+      return res
+        .status(403)
+        .json({ message: "Anda tidak memiliki otoritas untuk mengakses ini" });
+    }
+
+    // If the user has an "admin" role, continue to the next middleware function
+    next();
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Server Error" });
+  }
+};

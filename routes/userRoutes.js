@@ -19,6 +19,7 @@ router.post("/create", authenticateToken, authorizeAdmin, async (req, res) => {
       name: req.body.name,
       username: req.body.username,
       password: hashedPassword,
+      role: req.body.role,
     });
 
     // Save the user to the database
@@ -53,7 +54,7 @@ router.post("/register", async (req, res) => {
       name: req.body.name,
       username: req.body.username,
       password: hashedPassword,
-      role: "user",
+      role: req.body.role,
     });
 
     // Save the user to the database
@@ -124,7 +125,7 @@ router.get("/all", authenticateToken, authorizeAdmin, async (req, res) => {
 
     res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ error: error.message });
   }
 });
 

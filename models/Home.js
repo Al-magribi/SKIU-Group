@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const HomeSchema = mongoose.Schema({
-  slider: [{ url: { type: String, required: false } }],
+  img: { type: String, required: false },
   logo: { type: String, required: false },
   name: { type: String, required: false },
   tagline: { type: String, required: false },
