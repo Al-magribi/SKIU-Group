@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const app = express();
+
 const path = require("path");
 // ROUTES
 const teamRoutes = require("./routes/teamRoutes");
@@ -14,6 +14,9 @@ const stockroomRoutes = require("./routes/StockRoutes");
 
 const bodyParser = require("body-parser");
 const ErrMiddleware = require("./handler/ErrMiddleware");
+
+const app = express();
+app.use(cors());
 
 app.use(express.json({ limit: 100000 }));
 app.use(bodyParser.json({ limit: 100000 }));
@@ -56,6 +59,5 @@ if (process.env.NODE_ENV === "PRODUCTION") {
 }
 
 app.use(ErrMiddleware);
-app.use(cors());
 
 module.exports = app;

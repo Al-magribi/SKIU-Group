@@ -65,21 +65,21 @@ router.put(
   }
 );
 
-// router.put("/update-web/:id", async (req, res) => {
-//   try {
-//     let data = await Home.findById(req.params.id);
+router.put("/update/:id", async (req, res) => {
+  try {
+    let data = await Home.findById(req.params.id);
 
-//     req.body.phone = req.body.phone.replace(/^0/, "62");
+    req.body.phone = req.body.phone.replace(/^0/, "62");
 
-//     unit = await Home.findByIdAndUpdate(req.params.id, req.body, {
-//       new: true,
-//       runValidators: true,
-//     });
+    data = await Home.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
 
-//     res.status(201).json({ message: "Berhasil diperbarui", data });
-//   } catch (error) {
-//     res.status(404).json({ message: error });
-//   }
-// });
+    res.status(201).json({ message: "Berhasil diperbarui", data });
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+});
 
 module.exports = router;
