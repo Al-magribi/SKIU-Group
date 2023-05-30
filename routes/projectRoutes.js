@@ -15,7 +15,7 @@ router.post("/create", authenticateToken, authorizeAdmin, async (req, res) => {
 
     res.status(200).json({ message: "Berhasil ditambahkan", project });
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(404).json({ message: error.message });
   }
 });
 
@@ -30,7 +30,7 @@ router.get("/detail/:id", authenticateToken, async (req, res) => {
 
     res.status(200).json({ unit, user, report });
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(404).json({ message: error.message });
   }
 });
 
@@ -48,7 +48,7 @@ router.put("/update/:id", authenticateToken, async (req, res) => {
 
     res.status(201).json({ message: "Berhasil diperbarui", unit });
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(404).json({ message: error.message });
   }
 });
 
@@ -69,7 +69,7 @@ router.delete(
 
       res.status(200).json({ message: "Berhasil dihapus" });
     } catch (error) {
-      res.status(404).json({ error, message: `Tidak berhaasil dihapus` });
+      res.status(404).json({ message: error.message });
     }
   }
 );
@@ -81,7 +81,7 @@ router.get("/all", async (req, res) => {
 
     res.status(200).json({ units });
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(404).json({ message: error.message });
   }
 });
 
@@ -92,7 +92,7 @@ router.get("/myproject", authenticateToken, async (req, res) => {
 
     res.status(200).json(projects);
   } catch (error) {
-    res.status(404).json({ error, message: "Tidak ditemukan" });
+    res.status(404).json({ message: error.message });
   }
 });
 

@@ -65,9 +65,8 @@ router.post("/register", async (req, res) => {
 
     // Return the new user
     return res.status(201).json({ user, token });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: "Server Error" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 });
 
@@ -106,9 +105,8 @@ router.post("/login", async (req, res) => {
       role: user.role,
       token: token,
     });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: "Server Error" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 });
 
@@ -125,7 +123,7 @@ router.get("/all", authenticateToken, authorizeAdmin, async (req, res) => {
 
     res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -143,9 +141,8 @@ router.get(
       }
 
       return res.json(user);
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ message: "Internal server error" });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
     }
   }
 );
@@ -172,7 +169,7 @@ router.put(
       // Return the updated user
       res.json({ message: "Berhasil diperbarui", user });
     } catch (error) {
-      res.status(500).json({ error: error });
+      res.status(500).json({ message: error.message });
     }
   }
 );
@@ -197,9 +194,8 @@ router.delete(
 
       // Return a success message
       return res.json({ message: "Berhasil dihapus" });
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ message: "Server error" });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
     }
   }
 );

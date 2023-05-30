@@ -13,7 +13,7 @@ router.post("/create", authenticateToken, authorizeAdmin, async (req, res) => {
 
     res.status(200).json({ message: "Berhasil ditambahkan", inventory });
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(404).json({ message: error.message });
   }
 });
 
@@ -28,7 +28,7 @@ router.get(
 
       res.status(200).json(unit);
     } catch (error) {
-      res.status(404).json({ message: error });
+      res.status(404).json({ message: error.message });
     }
   }
 );
@@ -49,7 +49,7 @@ router.put(
 
       res.status(201).json({ message: "Berhasil diperbarui", unit });
     } catch (error) {
-      res.status(404).json({ message: error });
+      res.status(404).json({ message: error.message });
     }
   }
 );
@@ -71,7 +71,7 @@ router.delete(
 
       res.status(200).json({ message: "Berhasil dihapus" });
     } catch (error) {
-      res.status(404).json({ error, message: `Tidak berhaasil dihapus` });
+      res.status(404).json({ message: error.message });
     }
   }
 );
@@ -83,7 +83,7 @@ router.get("/all", async (req, res) => {
 
     res.status(200).json({ message: `${units.length} units`, units });
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(404).json({ message: error.message });
   }
 });
 

@@ -17,7 +17,7 @@ router.post(
 
       res.status(200).json(report);
     } catch (error) {
-      res.status(500).json({ message: error });
+      res.status(500).json({ message: error.message });
     }
   })
 );
@@ -34,7 +34,7 @@ router.get(
 
       res.status(200).json({ report, project });
     } catch (error) {
-      res.status(500).json({ message: error });
+      res.status(500).json({ message: error.message });
     }
   })
 );

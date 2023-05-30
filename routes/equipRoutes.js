@@ -9,7 +9,7 @@ router.post("/create", async (req, res) => {
 
     res.status(200).json({ message: "Berhasil ditambahkan", unit });
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(404).json({ message: error.message });
   }
 });
 
@@ -20,7 +20,7 @@ router.get("/detail/:id", async (req, res) => {
 
     res.status(200).json(unit);
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(404).json({ message: error.message });
   }
 });
 
@@ -36,7 +36,7 @@ router.put("/update/:id", async (req, res) => {
 
     res.status(201).json({ message: "Berhasil diperbarui", unit });
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(404).json({ message: error.message });
   }
 });
 
@@ -64,7 +64,7 @@ router.get("/all", async (req, res) => {
 
     res.status(200).json({ message: `${units.length} units`, units });
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(404).json({ message: error.message });
   }
 });
 

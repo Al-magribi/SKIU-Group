@@ -38,7 +38,7 @@ router.get(
 
       res.status(200).json(team);
     } catch (error) {
-      res.status(404).json({ error, message: "User tidak ditemukan" });
+      res.status(404).json({ message: error.message });
     }
   })
 );
@@ -87,7 +87,7 @@ router.delete(
 
       res.status(200).json({ message: "Berhasil dihapus" });
     } catch (error) {
-      res.status(404).json({ error, message: `Tidak berhaasil dihapus` });
+      res.status(404).json({ message: error.message });
     }
   })
 );
@@ -101,7 +101,7 @@ router.get(
 
       res.status(200).json({ team });
     } catch (error) {
-      res.status(404).json({ message: error });
+      res.status(404).json({ message: error.message });
     }
   })
 );

@@ -8,9 +8,9 @@ router.get("/myproject", authenticateToken, async (req, res) => {
   try {
     const projects = await Project.find({ user: req.user.id });
 
-    res.status(301).json({ success: true, projects });
+    res.status(200).json({ success: true, projects });
   } catch (error) {
-    res.status(404).json({ success: false, message: "Projek tidak ditemukan" });
+    res.status(404).json({ message: error.message });
   }
 });
 
